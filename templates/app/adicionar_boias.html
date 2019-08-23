@@ -1,0 +1,180 @@
+
+{% load staticfiles%}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>{%block title%}Bismarck Solaris . Aplicação{%endblock%}</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link href="{% static 'app/css/index.css'%}" rel="stylesheet" type="text/css" media="all" />  
+</head>
+
+<script type="text/javascript">
+    function apagar_boias(){
+      $.ajax({
+        method: "get",
+        url: '../apagar_boias',
+        success:function(responsedata){
+          // process on data
+          alert("Todas as boias foram removidas.")
+          location.reload()
+        } 
+
+      })
+    }
+</script>
+
+<style type="text/css">
+  .area-card-boias{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .card-boia{
+    display: flex;
+    margin: 10px;
+    padding: 3px;
+    border-radius: 3px;
+    background-color: white;
+  }
+  .card-boia-icone{
+    background-color: orange;
+    color: white;
+    padding: 15px;
+    margin-right: 5px;
+  }
+
+  .card-boia-conteudo label{
+    margin: 0px;
+    padding: 0px;
+
+  }
+      
+  .botoes-add-rmv-boias button{
+    margin: 10px;
+  }
+
+</style>
+
+<body>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informe as coordenadas da boia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form method="POST" action="../adicionar_boias/">
+        {% csrf_token %}
+
+       <div class="modal-body">
+        <div class="form-group">
+            <label for="latitude-boia" class="col-form-label">Latitude:</label>
+             {{form_add_boia.latitude}}
+          </div>
+          <div class="form-group">
+            <label for="longitude" class="col-form-label">Longitude:</label>
+            {{form_add_boia.longitude}}
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="principal">
+  <div class="header box-1">
+    <div>
+      <h3>Bismarck Solaris</h3> 
+      <h6>Instituto Federal Fluminense</h6> 
+    </div>
+
+    <div>
+      <a href="{%url 'app:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>  
+    </div>
+  </div>
+
+
+  <div style="display:flex; flex:1; justify-content: center; flex-direction: column">   
+    <div class="area-cards-boias" style="display: flex; flex-direction: column; ">
+      {% if boias%}
+        {% for b in boias%}
+          <div class="card-boia">
+            <div class="card-boia-icone">
+              <i class="far fa-life-ring fa-2x"></i>
+            </div>
+          
+            <div class="card-boia-conteudo">
+              <h5>Boia {{forloop.counter}}</h5>
+              <label>Latitude: {{b.latitude}}</label> <br/>
+              <label>Longitude: {{b.longitude}}</label>
+            </div>
+          </div>
+        {%endfor%}
+      {%else%}
+        <h5 style="color: white">Nenhuma boia ainda foi salva.</h5>
+      {%endif%}
+    </div>
+    
+
+    <div class="botoes-add-rmv-boias" style="display: flex; justify-content: center">    
+        <button onclick="apagar_boias()" id="btn-remover-boias" type="button" class="btn btn-primary">Remover boias</button>
+
+        <button id="btn-add-boias" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Adicionar boia</button>
+    </div>
+    
+  </div>
+  
+
+  <!--Área que contém o botão que dereciona até à página de geolocalização da embarcação-->
+  <div id="opcao">
+    <div>
+      <h5>Adicionar boias</h5>
+    </div>
+
+    <div>
+      <img src="{%static 'app/img/logo-solaris.jpg'%}" width="40" height="40">
+    </div>
+
+    <!--O botão que direciona até à página de geolocalização da embarcação-->
+    <div>
+       <a href="{%url 'app:mapa'%}" class="btn btn-primary btn-sm " role="button" aria-pressed="true">
+          Ir para mapa
+       </a>
+    </div>
+  </div>
+
+</div>
+
+
+</body>  
+
+</html>

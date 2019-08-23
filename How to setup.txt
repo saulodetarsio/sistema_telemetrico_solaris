@@ -1,0 +1,88 @@
+=========================  Pré requisitos ===================
+* Instalar o python 3.7
+
+* Logar como super usuário:
+	sudo su
+
+* Atualizar lista de pacotes do sistema:
+	apt-get update 
+
+* Instalar o Django. Comando abaixo:
+
+	pip3 install Django
+
+* Instalar o pacote "channels" com o seguinte comando:
+	
+	pip3 install -U channels
+
+* Instalar o pacote "asgi_redis" com o seguinte comando:
+
+	pip3 install asgi_redis
+
+* Instalar o pacote "service_indetity" com o seguinte comando:
+	pip3 install service_identity
+
+* Instalar o pacote "channels_redis" com o seguinte comando:
+	pip3 install channels_redis
+
+* Instalar o pacote "paho_mqtt" com o seguinte comando:
+	pip3 install paho-mqtt
+
+
+* Instalar o mosquitto server:
+	apt install -y mosquitto mosquitto-clients
+
+* Instalar o redis server:
+	apt-get install redis-server
+
+=============================================================================
+
+
+
+================ Executar a aplicação ==============================
+
+* Execute o servidor mosquitto digite o seguinte comando no terminal:
+	- mosquitto
+
+* Abra outro terminal e inicie o servidor redis, digitando o comando:
+	- redis_server
+
+
+* Editar o arquivo settings.py da aplicação. Ele está no seguinte diretório:
+	- bismarckl_solaris_2019/bismarck_solaris/settings.py
+
+	- Encontrar a variável ALLOWED_HOSTS e coloque endereço ip do raspi.
+
+	- O endereço ip é conseguido digitando o comando ifconfig no terminal.
+
+	- Salve e feche o arquivo.
+
+
+* Com o terminal, navegue até a pasta raiz da aplicação
+
+* Digite o seguinte comando para iniciar aplicação:
+	python3 manage.py runserver 0.0.0.0:8000 
+
+* Vá a um browser e digite o seguinte endereço para acesso à aplicação:
+	endereço_ip_raspi:8000/app
+
+
+* Com os seguintes dados, tenha acesso à aplicação:
+	usuario:
+	senha:	
+
+=====================================================================================
+
+
+================================ Simular transmissão ===================
+
+* Com o terminal, navegue até a pasta "bismarck_solaris_2019/simular_transmissao_bismarck" e digite o seguinte comando:
+
+	python3  publicador.py
+
+
+* Com outro terminal, navegue até a pasta "bismarck_solaris_2019/simular_transmissao_bismarck" e digite o seguinte comando:
+	python3  observador.py
+
+* Se informações estão sendo impressas no terminal do observador, então a tranmissão está ok.
+

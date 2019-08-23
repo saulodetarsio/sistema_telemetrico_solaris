@@ -1,0 +1,86 @@
+{% extends "app/base.html" %}
+
+{% load staticfiles %}
+
+{% block conteudo %}
+
+<head>
+    <title>{%block title%}Bismarck Solaris . Cadastro{%endblock%}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="{% static 'app/css/cadastro.css'%}" rel="stylesheet" type="text/css" media="all" /> 
+</head>
+
+<body>
+    <!-- main -->
+    <div class="main-w3layouts wrapper">
+        <div class="main-agileinfo">        
+            <div class="agileits-top">
+                <h1>Faça seu registro</h1>
+                
+
+                <form action="{% url 'app:user_register'%}" method="post">
+                    {% csrf_token %}
+
+                    <!--Campo-->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-file-signature fa-1x"></i></span>
+                        </div>
+
+                        {{user_form.first_name}}
+                                                
+                    </div>
+
+                    <!--Campo-->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="fas fa-user fa-1x"></i></span>
+                        </div>
+                        {{user_form.username}}             
+                    </div>
+
+                    <!--Campo-->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        {{user_form.password1}}
+                    </div>
+
+
+                    <!--Campo-->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        
+                        {{user_form.password2}}
+                        </div>
+
+                    <!--Botão-->
+                    <div class="d-flex justify-content-center mt-3 registro_container">
+                        <input type="submit" value="Registrar" class="btn-block btn-lg registro_btn">
+                    </div>
+                    <!--Labels-->
+                    <div class="mt-4">
+                        <div id="conta-sn" class="d-flex justify-content-center">
+                            Já possui uma conta?<a href="{% url 'app:user_login'%}" class="ml-2">Acesse aqui</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <div id="bs-copyright" class="d-flex justify-content-center">
+                            &copy 2019 Bismarck Solaris
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{%endblock%}
+
+
+

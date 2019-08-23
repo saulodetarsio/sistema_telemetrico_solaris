@@ -1,0 +1,86 @@
+{% load staticfiles%}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{%block title%}Bismarck Solaris . Aplicação{%endblock%}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <link href="{% static 'app/css/mapa.css'%}" rel="stylesheet" type="text/css" media="all" />
+
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+  
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>    
+
+
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+
+  <script type="text/javascript" src="{% static 'app/js/controle_mapa/controle_mapa.js'%}"></script>
+  <script type="text/javascript" src="{% static 'app/js/app_helper.js'%}"></script>
+
+
+</head>
+
+
+<body>
+
+<div class="principal">
+
+  <div class="header box-1">
+    <div>
+      <h3>Bismarck solaris</h3> 
+      <h6>Instituto Federal Fluminense</h6>
+    </div>
+
+    
+    <div>
+      <a href="{%url 'app:adicionar_boias' %}"><i class="far fa-life-ring fa-2x"></i></a>
+      <a href="{%url 'app:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>  
+    </div>
+
+    
+  </div>
+
+  <!--Área de mapas  e medidas-->
+  <div class="main box-2">
+    
+    <div id="mapa">
+    </div>
+
+  </div>
+
+  <!--Área que contém o botão que dericiona até a página das informações da embarcação-->
+  <div id="opcao">
+    <div>
+      <h5>Localização</h5>
+    </div>
+
+    <div>
+      <img src="{%static 'app/img/logo-solaris.jpg'%}" width="40" height="40">
+    </div>
+
+    <!--O botão que direciona até a página das informações da embarcação-->
+    <div>
+      <a href="{% url 'app:index' %}" class="btn btn-primary btn-sm " role="button" aria-pressed="true">Ir para medidas</a>
+    </div>
+
+  </div>
+
+</div>
+
+</body>  
+
+</html>
