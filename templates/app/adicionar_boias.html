@@ -1,4 +1,5 @@
 
+<!-- Carregando os arquivos estáticos. Estilo, imagens e scripts que a página necessiyta para funcionar--->
 {% load staticfiles%}
 
 <!DOCTYPE html>
@@ -23,62 +24,32 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <link href="{% static 'app/css/index.css'%}" rel="stylesheet" type="text/css" media="all" />  
+    <link href="{% static 'app/css/adicionar_boias.css'%}" rel="stylesheet" type="text/css" media="all" />
+
 </head>
 
 <script type="text/javascript">
+
+    //Função que apaga o vetor de boias presentes dentro do servidor
     function apagar_boias(){
       $.ajax({
         method: "get",
-        url: '../apagar_boias',
+        url: '../apagar_boias',  //Contem o comando que limpa o vetor de boias
         success:function(responsedata){
-          // process on data
-          alert("Todas as boias foram removidas.")
+          //Recarregar a página
           location.reload()
         } 
-
       })
     }
 </script>
-
-<style type="text/css">
-  .area-card-boias{
-    display: flex;
-    flex-direction: column;
-  }
-
-
-  .card-boia{
-    display: flex;
-    margin: 10px;
-    padding: 3px;
-    border-radius: 3px;
-    background-color: white;
-  }
-  .card-boia-icone{
-    background-color: orange;
-    color: white;
-    padding: 15px;
-    margin-right: 5px;
-  }
-
-  .card-boia-conteudo label{
-    margin: 0px;
-    padding: 0px;
-
-  }
-      
-  .botoes-add-rmv-boias button{
-    margin: 10px;
-  }
-
-</style>
 
 <body>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      
+      <!--Cabeçalho do modal-->
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Informe as coordenadas da boia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -86,29 +57,37 @@
         </button>
       </div>
 
+      <!--Formulário que adquire as localizações das boias-->
       <form method="POST" action="../adicionar_boias/">
         {% csrf_token %}
 
+        <!--Corpo do modal-->
        <div class="modal-body">
-        <div class="form-group">
+          <!---Latitude-->
+          <div class="form-group">
             <label for="latitude-boia" class="col-form-label">Latitude:</label>
              {{form_add_boia.latitude}}
           </div>
+          <!---Longitude-->
           <div class="form-group">
             <label for="longitude" class="col-form-label">Longitude:</label>
             {{form_add_boia.longitude}}
           </div>
       </div>
+        
       <div class="modal-footer">
+        <!--Botão de fechar dialog-->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        
+        <!--Botão de inserir uma boia com base nas coordenadas inseridas no form do dialog-->
         <button type="submit" class="btn btn-primary">Adicionar</button>
       </div>
       </form>
 
     </div>
   </div>
-
 </div>
+
 
 <div class="principal">
   <div class="header box-1">
@@ -122,16 +101,22 @@
     </div>
   </div>
 
+  <!--Área que mantém os botões de remover boias e o botão que abre o dialogo para inserir as boias-->
+  <div class="container-boias">   
 
-  <div style="display:flex; flex:1; justify-content: center; flex-direction: column">   
-    <div class="area-cards-boias" style="display: flex; flex-direction: column; ">
+    <!--Divs que exibem as coordenadas informdas pelo usuário--->
+    <div class="area-cards-boias">
+      
+      <!--Se há boias inseridas--->
       {% if boias%}
+        <!-- Varrer todo o vetor de boias--->
         {% for b in boias%}
+          <!--Adicionar elementos HTML para cada uma delas-->
           <div class="card-boia">
             <div class="card-boia-icone">
               <i class="far fa-life-ring fa-2x"></i>
             </div>
-          
+            <!--Latitude e longitude de cada boia inserida-->
             <div class="card-boia-conteudo">
               <h5>Boia {{forloop.counter}}</h5>
               <label>Latitude: {{b.latitude}}</label> <br/>
@@ -144,16 +129,17 @@
       {%endif%}
     </div>
     
+    <!--Área dos botões que apagam todas as boias e o que abre o dialog que contém o formĺário para inserção das boias -->
+    <div class="botoes-add-rmv-boias">    
 
-    <div class="botoes-add-rmv-boias" style="display: flex; justify-content: center">    
+        <!--Botão que remove todas as boias-->
         <button onclick="apagar_boias()" id="btn-remover-boias" type="button" class="btn btn-primary">Remover boias</button>
-
+        <!--Abre o dialog que contém o formulário que insere boias-->
         <button id="btn-add-boias" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Adicionar boia</button>
     </div>
     
   </div>
   
-
   <!--Área que contém o botão que dereciona até à página de geolocalização da embarcação-->
   <div id="opcao">
     <div>
