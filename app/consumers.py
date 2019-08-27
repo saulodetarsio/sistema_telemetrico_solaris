@@ -1,9 +1,11 @@
+
+import paho.mqtt.client as mqtt # importa o pacote mqtt
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import json
 import threading
 import sys
-import paho.mqtt.client as mqtt # importa o pacote mqtt
+
 
 broker = "localhost" # define o host do broker mqtt'
 port = 1883 # define a porta do broker
@@ -28,7 +30,7 @@ class AppConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
         u = self.scope["user"]
-
+        
         try:
             client = mqtt.Client() # instancia a conexao
             client.on_connect = self.on_connect # define o callback do evento on_connect
@@ -46,7 +48,5 @@ class AppConsumer(WebsocketConsumer):
         for a in conectados:
             print(a)
             if str(u) == a[0]:
-                print("Desconectando do mosquitto")
                 a[1].disconnect()
                 conectados.remove(a)
-                print("Lista de conectados: {}".format(len(conectados)))
