@@ -24,7 +24,7 @@ def on_connect(client, userdata, flags, rc):
 
 #Ficará publicando dados aleátórios para o canal no qual está escrito, que é renderizar\
 try:
-    client = mqtt.Client() # instancia a conexao
+    client = mqtt.Client("publicador") # instancia a conexao
     client.on_connect = on_connect # define o callback do evento on_connect
     client.connect(broker, port, keppAlive) # inicia a conexao
 
