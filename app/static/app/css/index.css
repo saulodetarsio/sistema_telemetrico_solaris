@@ -48,7 +48,6 @@ body {
 }
 
 
-
 /**Área de reservada para um card**/
 .card{
 	display: flex;
@@ -137,6 +136,7 @@ body {
 	display: none;
 }
 
+
 /**Caso o dispositivo tenha 720px no máximo e esteja em modo paisagem**/
 @media (max-width: 720px) and (orientation: landscape){
 	.header{
@@ -158,7 +158,7 @@ body {
 		font-size: 1.5rem;
 	}
 
-	.main .card. .card-info h3{
+	.main .card .card-info h3{
 		font-size: 96%;
 	}
 	
@@ -166,7 +166,7 @@ body {
 		font-weight: bold;
 	}
 
-	.opcao div h5{
+	.opcao>div>h5{
 		font-size: 90%;
 	}
 
