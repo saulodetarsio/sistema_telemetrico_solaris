@@ -1,4 +1,3 @@
-
 h1, h2, h3, h4, h5, h6{
 	margin: 0;
 	padding: 0;
@@ -18,6 +17,7 @@ body {
 }
 
 
+/**Estrutura 1**/
 .header {
 	display: flex;
 	flex-direction: row;
@@ -28,34 +28,16 @@ body {
 	background: #233237;
 }
 
-#opcao{
-	display: flex;
-	color: white;
-	align-items: center;
-	background: #233237;
-	justify-content: space-between;
-}
-
-
-#opcao>div{
-	padding: 10px;
-
-}
-
-.header>div>i{
+.header div i{
 	margin-right: 10px; 
 }
 
-.header>div>a{
+.header div a{
 	color: white;
 }
 
-#opcao>div>img{
-	border-radius: 5px;
-	display: none;
-}
 
-
+/**Estrutura 2**/
 .main {
 	display: flex;
 	flex-direction: row;
@@ -64,6 +46,8 @@ body {
 	flex: 1;
 	padding: 10px;
 }
+
+
 
 /**Área de reservada para um card**/
 .card{
@@ -84,13 +68,13 @@ body {
 
 }
 
-
 .card-icon{
 	padding: 5px 20px;
 	margin-left: 10px;
 	border-radius: 5px;
 	font-size: 2.0rem;
 }
+
 
 /**Cor de fundo do ícone nos cards de informação**/
 .card-icon-1{
@@ -134,32 +118,34 @@ body {
 }
 
 
-/**Rodapé***/
-#footer {
+/**Estrutura 3**/
+.opcao{
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	
 	color: white;
-	text-align: center;
-	
+	align-items: center;
+	background: #233237;
+	justify-content: space-between;
 }
 
+.opcao div{
+	padding: 10px;
+
+}
+
+.opcao div img{
+	border-radius: 5px;
+	display: none;
+}
+
+/**Caso o dispositivo tenha 720px no máximo e esteja em modo paisagem**/
 @media (max-width: 720px) and (orientation: landscape){
-	
-	.header>div>h6{
+	.header{
 		display: none;
 	}
 
-	#opcao>div>h5{
-		font-size: 90%;
+	.header div h6{
+		display: none;
 	}
-
-
-	#opcao>div>img{
-		display: block;
-	}
-
 
 	.card{
 		display: flex;
@@ -172,15 +158,20 @@ body {
 		font-size: 1.5rem;
 	}
 
-	.main>.card>.card-info>h3{
+	.main .card. .card-info h3{
 		font-size: 96%;
 	}
 	
-	.main>.card>.card-info>h6{
+	.main .card .card-info h6{
 		font-weight: bold;
 	}
 
-	.header{
-		display: none;
+	.opcao div h5{
+		font-size: 90%;
 	}
+
+	.opcao div img{
+		display: block;
+	}
+
 }
