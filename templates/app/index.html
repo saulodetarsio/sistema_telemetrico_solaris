@@ -130,19 +130,20 @@
     </div>
 
   </div>
-  
+
 </div>
 
-
 <script>
-  
-    var appSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/app/');
+ 
+    var appSocket = new WebSocket("ws://"+ window.location.host +"/ws/app/");
     
+    //Recebendo informaçoes da medidas na página
     appSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
+
+        var quant_clientes = data['quant_clientes']
+
         var tam_message = message.length
         var pure = message.slice(2, tam_message-1)
 
@@ -161,17 +162,13 @@
         corrente_motor.textContent = medidas[3] + " A"
 
         var velocidade_barco = document.getElementById('velocidade_barco')
-        velocidade_barco.textContent = medidas[4] + " V"
-            
-    };
-
-    appSocket.onclose = function(e) {
-        console.log('Esperando o envio de dados pelo servidor...');
-    };
-
+        velocidade_barco.textContent = medidas[4] + " nós"  
+    }
+    appSocket.onclose = function(e){
+      alert("Desconectando. Não houve resposta do broker")
+    }
+    
 </script>
-
-
 
 </body>  
 
