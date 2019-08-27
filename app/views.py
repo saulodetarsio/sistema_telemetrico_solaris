@@ -1,31 +1,15 @@
-from django.shortcuts import render
 from app.forms import UserLoginForm, UserCreateForm, AdicionarBoiaForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-import json
 from app.models import Boia
+from django.urls import reverse
+from django.http import JsonResponse
+from django.shortcuts import render
+import json
+
 
 boias = []
-
-@login_required
-def get_boias(request):
-    a = []
-    for b in boias:
-        latitude = b.latitude
-        longitude = b.longitude
-        a.append([latitude, longitude])
-
-    return HttpResponse(json.dumps(a), content_type='application/json')
-
-@login_required
-def delete_boias(request):
-    boias.clear()
-    form_add_boia = AdicionarBoiaForm()
-    return render(request, 'app/adicionar_boias.html', {'form_add_boia': form_add_boia, 'boias' : []})
-       
 
 def register(request):
     if request.method == 'POST':
@@ -42,12 +26,7 @@ def register(request):
         user_form = UserCreateForm()
     return render(request,'app/cadastro.html',
                           {'user_form':user_form})
-
-
-def ver_dependencias(request):
-    return render(request, 'app/ver_dependencias.html')
-
-
+    
 """
     Método que trata a ação de login inicializada pelo usuário do software. Trata-se de uma requisião web,
     logo o "request" como parâmetro da função. O método testa se o usuário que está realizando a requisição ja está 
@@ -167,3 +146,39 @@ def adicionar_boias(request):
 
     #em caso de requisição da página de adição de boias, ou seja, método GET
     return render(request,'app/adicionar_boias.html', {'form_add_boia': form_add_boia, 'boias' : boias})
+
+
+"""
+    Método que retorna todas as boias presentes no vetor boias. Os dados presentes
+    neste vetor serão retornados para a página que está solicitando tais dados, que é a 
+    página de visualização da geolocalização da embarcação.
+"""
+@login_required
+def get_boias(request):
+    a = [] # um vetor auxiliar
+    #Loop para capturar todos os elementos presentes no vetor
+
+    for b in boias:
+        latitude = b.latitude  #latitude
+        longitude = b.longitude #longitude
+    
+        a.append([latitude, longitude]) # um par ordenado do tipo [latitude, longitude]
+
+    #Retornando os dados para a página de geolocalização da embarcação
+    return HttpResponse(json.dumps(a), content_type='application/json')
+
+"""
+    Método responsável por remover todas as boias que estão salvas no vetor boias.
+    O vetor terá todos os elemento removidos caso o usuário clique no botão de remover
+    boias presente na tela que adiciona as boias que definem o circuito da prova.
+"""
+@login_required
+def delete_boias(request):
+    #limpando o vetor com o método clear
+    boias.clear()
+    #Instancia o formuĺário para adição de novas boias
+    form_add_boia = AdicionarBoiaForm()
+    #Retorna para a página de adição de boias
+    #como o vetor não apresenta elemento, nenhuma informação de boias aparecerá após o clique do botão de remoção
+    return render(request, 'app/adicionar_boias.html', {'form_add_boia': form_add_boia, 'boias' : []})
+       
