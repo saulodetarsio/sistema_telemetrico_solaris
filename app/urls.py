@@ -17,6 +17,4 @@ urlpatterns = [
 	path('adicionar_boias/', views.adicionar_boias, name="adicionar_boias"), #ação e path -> quando há a necessidade de adicionar boias
 	path('boias/', views.get_boias, name="boias"), #ação e path -> retorna as boias adicionadas para compor o circuito de prova
 	path('apagar_boias/', views.delete_boias, name="deletar_boias"), #ação e path -> quando a necessida de se apagar todas as boias
-
-	path('ver_dependencias', views.ver_dependencias, name="ver_dependencias")
 ]
