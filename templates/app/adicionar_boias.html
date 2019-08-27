@@ -1,12 +1,11 @@
-
-<!-- Carregando os arquivos estáticos. Estilo, imagens e scripts que a página necessiyta para funcionar--->
+<!-- Carregando os arquivos estáticos. Estilo, imagens e scripts que a página necessita para funcionar--->
 {% load staticfiles%}
 
 <!DOCTYPE html>
 <html>
   <head>
     
-    <title>{%block title%}Bismarck Solaris . Aplicação{%endblock%}</title>
+    <title>Bismarck Solaris . Adicionar boias</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,38 +13,24 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!--Estilização da página de adição de boias-->
+    <link href="{% static 'app/css/adicionar_boias.css'%}" rel="stylesheet" type="text/css" media="all" />
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-    <link href="{% static 'app/css/adicionar_boias.css'%}" rel="stylesheet" type="text/css" media="all" />
-
 </head>
-
-<script type="text/javascript">
-
-    //Função que apaga o vetor de boias presentes dentro do servidor
-    function apagar_boias(){
-      $.ajax({
-        method: "get",
-        url: '../apagar_boias',  //Contem o comando que limpa o vetor de boias
-        success:function(responsedata){
-          //Recarregar a página
-          location.reload()
-        } 
-      })
-    }
-</script>
 
 <body>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Modal que contém o formulário para adição de boias-->
+<div class="modal fade" id="adicionar_boias_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       
@@ -87,26 +72,31 @@
     </div>
   </div>
 </div>
+<!--Fim do modal que contém o formulário de adição de boias-->
 
 
 <div class="principal">
-  <div class="header box-1">
+
+  <!--Cabeçalho--->
+  <div class="header">
+
+    <!---->
     <div>
       <h3>Bismarck Solaris</h3> 
       <h6>Instituto Federal Fluminense</h6> 
     </div>
 
+    <!--Ícone para sair da aplicação-->
     <div>
       <a href="{%url 'app:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>  
     </div>
   </div>
 
   <!--Área que mantém os botões de remover boias e o botão que abre o dialogo para inserir as boias-->
-  <div class="container-boias">   
+  <div class="main">   
 
-    <!--Divs que exibem as coordenadas informdas pelo usuário--->
+    <!--Divs que exibem as coordenadas informadas pelo usuário--->
     <div class="area-cards-boias">
-      
       <!--Se há boias inseridas--->
       {% if boias%}
         <!-- Varrer todo o vetor de boias--->
@@ -125,23 +115,21 @@
           </div>
         {%endfor%}
       {%else%}
-        <h5 style="color: white">Nenhuma boia ainda foi salva.</h5>
+        <h5>Nenhuma boia adicionada</h5>
       {%endif%}
     </div>
-    
-    <!--Área dos botões que apagam todas as boias e o que abre o dialog que contém o formĺário para inserção das boias -->
-    <div class="botoes-add-rmv-boias">    
-
-        <!--Botão que remove todas as boias-->
-        <button onclick="apagar_boias()" id="btn-remover-boias" type="button" class="btn btn-primary">Remover boias</button>
-        <!--Abre o dialog que contém o formulário que insere boias-->
-        <button id="btn-add-boias" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Adicionar boia</button>
-    </div>
-    
   </div>
-  
+
+      <!--Área dos botões que apagam todas as boias e o que abre o dialog que contém o formĺário para inserção das boias -->
+    <div class="botoes-add-rmv-boias">    
+        <!--Botão que remove todas as boias-->
+        <button onclick="apagar_boias()" type="button" class="btn btn-primary">Remover boias</button>
+        <!--Abre o dialog que contém o formulário que insere boias-->
+        <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#adicionar_boias_form">Adicionar boia</button>
+    </div>
+
   <!--Área que contém o botão que dereciona até à página de geolocalização da embarcação-->
-  <div id="opcao">
+  <div class="opcao">
     <div>
       <h5>Adicionar boias</h5>
     </div>
@@ -160,6 +148,20 @@
 
 </div>
 
+<script type="text/javascript">
+    //Função que apaga o vetor de boias presentes dentro do servidor
+    function apagar_boias(){
+      $.ajax({
+        method: "get",
+        url: '../apagar_boias',  //Contem o comando que limpa o vetor de boias
+        success:function(responsedata){
+          location.reload()
+          alert("Todas as boias foram removidas.")
+          
+        } 
+      })
+    }
+</script>
 
 </body>  
 
