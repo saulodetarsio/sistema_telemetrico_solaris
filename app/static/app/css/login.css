@@ -19,12 +19,6 @@ html {
 	height: 90%;
 }
 
-.user-input input, .password-input input{
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-
-}
-
 .user-card {
 	background: #233237;
 	padding: 10px;
@@ -57,60 +51,6 @@ html {
 	border-radius: 50%;
 }
 
-.form-container {
-	margin: 10px;
-}
-
-.user-input, .password-input{
-	display: flex;
-	align-items: stretch;
-	margin-top: 10px;
-}
-.user-input>i, .password-input>i{
-	color: white;
-	background-color:  #c0392b;
-	padding: 10px;
-}
-
-.user-input>input, .password-input>input{
-	flex: 1;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px; 
-}
-
-.botao{
-	flex: 1;
-	margin: 10px;
-}
-.login-btn {
-  width: 100%;
-  background: #c0392b !important;
-  color: white !important;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.login-btn:hover {
-    opacity: 0.9;
-}
-
-
-.login-btn:focus {
-  box-shadow: none !important;
-  outline: 0px !important;
-}
-
-.botao>input{
-	padding: 10px;
-	border-radius: 5px;
-}
- .form-container>h6{
- 	color: white;
- 	text-align: center;
- }
-
 
 .erros {
 	background-color: red;
@@ -126,12 +66,60 @@ html {
 	padding: 0px;
 }
 
-@media (max-width: 720px) and (orientation: landscape){
-	.user-card{
-		display: flex;
-		flex-direction: row;
-	}
+.form-container {
+	margin: 10px;
 }
+
+.user-input, .password-input{
+	display: flex;
+	align-items: stretch;
+	margin-top: 10px;
+}
+
+.user-input input, .password-input input{
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px; 
+
+}
+
+.user-input i, .password-input i{
+	color: white;
+	background-color:  #c0392b;
+	padding: 10px;
+}
+
+.botao{
+	flex: 1;
+	margin: 10px;
+}
+
+
+.login-btn {
+  width: 100%;
+  background: #c0392b !important;
+  color: white !important;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+.login-btn:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+ .form-container h6{
+ 	color: white;
+ 	text-align: center;
+ }
+
 
 
 
