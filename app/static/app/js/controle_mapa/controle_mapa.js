@@ -35,7 +35,7 @@ function ControleMapa (){
 	* Cria e adiciona no mapa o marcador que representa o barco.
 	**/
 	this.adicionar_marcador_barco = function(coord){
-		var myIcon = L.divIcon({className: 'helmuth'});
+		var myIcon = L.divIcon({className: 'geolocalizacao'});
 		this.barco = L.marker(coord, {icon: myIcon}).addTo(this.mapa);
 	}
 

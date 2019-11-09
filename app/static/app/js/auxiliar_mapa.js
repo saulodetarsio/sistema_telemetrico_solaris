@@ -1,8 +1,6 @@
 $(document).ready(function() {
     var controleMapa = new ControleMapa();
   
-    
-    
     /**
     *   Valores que indicam o local que será renderizado no centro do elemento HTML.        
     **/
@@ -57,23 +55,21 @@ $.ajax({
 
     controleMapa.renderizar_mapa(fonte_mapa, zoom_minimo, zoom_maximo)
     controleMapa.adicionar_marcador_barco([-22.753036, -41.8922]);
-    controleMapa.adicionar_marcador_barco([-22.753030, -41.89220]);
-      
+       
     var appSocket = new WebSocket("ws://"+ window.location.host +"/ws/app/loc");
     //Recebendo informaçoes da medidas na página
     appSocket.onmessage = function(e) {
       var data = JSON.parse(e.data);
       var message = data['message'];
       
+
       var m = message.substr(3, 21);
       
       var t = m.split(",")
       var lat = t[0]
-      var lng = t[1]
+      var lng = t[1]      
       
-      
-     
-        //controleMapa.atualizar_localizacao_barco([lat, lng])
+        controleMapa.atualizar_localizacao_barco([lat, lng])
     }
     
     

@@ -5,13 +5,9 @@ $(document).ready(function() {
       var data = JSON.parse(e.data);
       var message = data['message'];
 
-      
-      var tam_message = message.length
-      var pure = message.substr(2,24)
+      var pure = message.substr(3,24)
     
       var medidas = pure.split(',')
-
-      console.log(medidas)
       
 
       var bateria_principal = document.getElementById('bateria_principal')
@@ -29,4 +25,4 @@ $(document).ready(function() {
       var velocidade_barco = document.getElementById('velocidade_barco')
       velocidade_barco.textContent = medidas[4] + " nós"  
   }
-}
+})
