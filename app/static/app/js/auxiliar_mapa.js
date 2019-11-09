@@ -1,18 +1,10 @@
 $(document).ready(function() {
-
-
     var controleMapa = new ControleMapa();
+  
+    
     
     /**
-    *   Valores que indicam o local que será renderizado no centro do elemento HTML.
-
-        IFF = [-22.814806, -41.981462];
-
-        PRAIA = [-22.761624, -41.919103]
-    
-        PRAIA2 = [-22.753329, -41.886513]
-        LAGOA IATE CLUBE [-27.610148, -48.481733]
-        
+    *   Valores que indicam o local que será renderizado no centro do elemento HTML.        
     **/
     var centro_mapa = [-22.753036, -41.8922]
 
@@ -33,18 +25,6 @@ $(document).ready(function() {
     * O valor inicial de zoom que o mapa será renderizados
     **/
     var zoom_inicial = 15;
-
-    
-
-    /**
-    * Localizações para movimentar o barco automaticamente
-    **/
-    var percurso_fake_helmuth = [
-        [-22.753352, -41.887779],
-        [-22.749515, -41.894774],
-        [-22.753194, -41.894989],
-        [-22.753352, -41.887779]
-    ];
 
 
     /**
@@ -75,14 +55,27 @@ $.ajax({
     }
 })
 
-    /***
-    var boias = {
-    boia1 : [-22.750063, -41.895075],
-    boia2 : [-22.748124, -41.891599],
-    boia3 : [-22.750934, -41.887221],
-    boia4 : [-22.753388, -41.891772]
-   } **/
-   
     controleMapa.renderizar_mapa(fonte_mapa, zoom_minimo, zoom_maximo)
+    controleMapa.adicionar_marcador_barco([-22.753036, -41.8922]);
+    controleMapa.adicionar_marcador_barco([-22.753030, -41.89220]);
+      
+    var appSocket = new WebSocket("ws://"+ window.location.host +"/ws/app/loc");
+    //Recebendo informaçoes da medidas na página
+    appSocket.onmessage = function(e) {
+      var data = JSON.parse(e.data);
+      var message = data['message'];
+      
+      var m = message.substr(3, 21);
+      
+      var t = m.split(",")
+      var lat = t[0]
+      var lng = t[1]
+      
+      
+     
+        //controleMapa.atualizar_localizacao_barco([lat, lng])
+    }
+    
+    
 
 })
