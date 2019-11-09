@@ -25,6 +25,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 
+     <!-- Latest compiled JavaScript -->
+    <script src="{% static 'app/js/auxiliar_index.js'%}" ></script> 
+
 </head>
 
 <body>
@@ -131,38 +134,6 @@
   </div>
 
 </div>
-
-
-<script>
-  var appSocket = new WebSocket("ws://"+ window.location.host +"/ws/app/");
-  //Recebendo informaçoes da medidas na página
-  appSocket.onmessage = function(e) {
-      var data = JSON.parse(e.data);
-      var message = data['message'];
-
-      var quant_clientes = data['quant_clientes']
-
-      var tam_message = message.length
-      var pure = message.slice(2, tam_message-1)
-
-      var medidas = pure.split(' ')
-
-      var bateria_principal = document.getElementById('bateria_principal')
-      bateria_principal.textContent = medidas[0] + " V"
-
-      var baterias_auxiliares = document.getElementById('baterias_auxiliares')
-      baterias_auxiliares.textContent = medidas[1] + " V"
-
-      var placas_solares = document.getElementById('placas_solares')
-      placas_solares.textContent = medidas[2] + " V"
-      
-      var corrente_motor = document.getElementById('corrente_motor')
-      corrente_motor.textContent = medidas[3] + " A"
-
-      var velocidade_barco = document.getElementById('velocidade_barco')
-      velocidade_barco.textContent = medidas[4] + " nós"  
-  }
-</script>
 
 </body>  
 
