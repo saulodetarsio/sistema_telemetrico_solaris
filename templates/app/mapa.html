@@ -9,31 +9,28 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <!-- Latest compiled JavaScript >
+      
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 
-  <!--Estilização da biblioteca do mapa--->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <---->
+
+
 
   <!--Font awesome-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link href="{% static 'app/css/all.css'%}" rel="stylesheet" type="text/css" media="all" />  
+
 
   <!--Estilização da página de mapa-->
+  <link href="{% static 'app/css/leaflet.css'%}" rel="stylesheet" type="text/css" media="all" />  
+  <link href="{% static 'app/css/bootstrap.css'%}" rel="stylesheet" type="text/css" media="all" />  
   <link href="{% static 'app/css/mapa.css'%}" rel="stylesheet" type="text/css" media="all" />
 
   <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   <script src="{% static 'app/js/jquery.js'%}"></script>
   
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 
-  <!--Script da bilbioteca de mapa-->  
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>    
-
-  <!--Conjunto de funções implementadas para renderização do mapa-->
-  <script type="text/javascript" src="{% static 'app/js/controle_mapa/controle_mapa.js'%}"></script>
-
-  <!--Main-->
-  <script type="text/javascript" src="{% static 'app/js/auxiliar_mapa.js'%}"></script>
 
 </head>
 
@@ -51,7 +48,7 @@
 
     <!--Ícones-->  
     <div>
-      <a href="{%url 'app:adicionar_boias' %}"><i class="far fa-life-ring fa-2x"></i></a>
+      <a href="{%url 'app:adicionar_boias' %}"><i class="fas fa-life-ring fa-2x"></i></a>
       <a href="{%url 'app:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>  
     </div>
 
@@ -72,7 +69,9 @@
     </div>
 
     <div>
-      <img src="{%static 'app/img/logo-solaris.jpg'%}" width="40" height="40">
+        <img src="{%static 'app/img/logo-solaris.jpg'%}" width="40" height="40">
+       <img src="{%static 'app/img/mapa/15/12570/18511.jpg'%}" width="40" height="40">
+       <img src="{%static 'app/img/mapa/15/12570/18510.jpg'%}" width="40" height="40">
     </div>
 
     <!--O botão que direciona até a página das informações da embarcação-->
@@ -84,6 +83,14 @@
   
 </div>
 
-</body>  
+</body> 
+
+  <!--Script da bilbioteca de mapa-->  
+  <script src="{% static 'app/js/leaflet.js'%}"></script>
+
+  <!--Conjunto de funções implementadas para renderização do mapa-->
+  <script type="text/javascript" src="{% static 'app/js/controle_mapa/controle_mapa.js'%}"></script>
+  <!--Main-->
+  <script type="text/javascript" src="{% static 'app/js/auxiliar_mapa.js'%}"></script> 
 
 </html>

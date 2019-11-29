@@ -10,20 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <!--Font awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="{% static 'app/css/all.css'%}" rel="stylesheet" type="text/css" media="all" />  
 
+    <!-- Latest compiled and minified CSS -->
+    <link href="{% static 'app/css/bootstrap.css'%}" rel="stylesheet" type="text/css" media="all" />  
     <!--Estilização da página de adição de boias-->
     <link href="{% static 'app/css/adicionar_boias.css'%}" rel="stylesheet" type="text/css" media="all" />
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    <script src="{% static 'app/js/jquery.js'%}"></script>
+    <script src="{% static 'app/js/bootstrap.js'%}"></script>
 
 </head>
 

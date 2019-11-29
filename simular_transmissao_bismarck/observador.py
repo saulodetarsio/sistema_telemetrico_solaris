@@ -9,10 +9,10 @@ from datetime import datetime
 
 
 
-broker = "192.168.0.134" # define o host do broker mqtt'
+broker = "localhost" # define o host do broker mqtt'
 port = 1883 # define a porta do broker
 keppAlive = 60 # define o keepAlive da conexao
-topic = 'app/' # define o topico que este script assinara
+topic = 'app/medidas' # define o topico que este script assinara
 
 
 

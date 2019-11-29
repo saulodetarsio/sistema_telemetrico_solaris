@@ -10,27 +10,31 @@ $(document).ready(function() {
     /***
     *   O valor máximo de zoom do mapa.
     **/
-    var zoom_maximo = 19;
+    var zoom_maximo = 16;
     
 
     /**
     *   O valor mínimo de zoom do mapa.
     **/
-    var zoom_minimo =  13;
+    var zoom_minimo =  15;
 
 
     /** 
     * O valor inicial de zoom que o mapa será renderizados
     **/
-    var zoom_inicial = 15;
+    var zoom_inicial = 16;
 
 
     /**
     * A forma de exbição de mapa. Satélite, Híbridos, ruas, etc
     **/
-var fonte_mapa = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+//var fonte_mapa = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
 
+//var fonte_mapa = "../img/mapa/{z}/{x}/{y}.png"
 
+  var fonte_mapa = 'static/img/mapa/{z}/{x}/{y}.jpeg';
+
+console.log(fonte_mapa)
 controleMapa.criar_mapa("mapa", centro_mapa, zoom_inicial)
 
 var boias = []
@@ -63,15 +67,18 @@ $.ajax({
       var message = data['message'];
       
 
-      var m = message.substr(3, 21);
+      var m = message.substr(3, 19);
       
       var t = m.split(",")
-      var lat = t[0]
-      var lng = t[1]      
-      
-        controleMapa.atualizar_localizacao_barco([lat, lng])
+      var lat = t[0].toString()
+      var lng = t[1].toString()   
+
+      var n_la = lat.slice(0, 3)+"."+lat.slice(3, 9)   
+      var n_lo = lng.slice(0, 3)+"."+lng.slice(3, 9)   
+
+
+       controleMapa.atualizar_localizacao_barco([n_la, n_lo])
     }
-    
     
 
 })
