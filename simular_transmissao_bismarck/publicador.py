@@ -7,7 +7,7 @@ import numpy as np
 import random
 
 
-broker = "192.168.0.102" # define o host do broker mqtt'
+broker = "localhost" # define o host do broker mqtt'
 port = 1883 # define a porta do broker
 keppAlive = 60 # define o keepAlive da conexao
 topico_medidas = 'app/medidas' # define o topico que este script assinara
