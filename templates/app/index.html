@@ -36,7 +36,12 @@
 
     <!-- Ícones para adicionar boias e sair da aplicação -->
     <div>
-      <a href="{%url 'app:adicionar_boias' %}"><i class="fas fa-life-ring fa-2x"></i></a>
+
+      {% if user.is_superuser %}
+        <a href="{%url 'app:adicionar_boias' %}"><i class="fas fa-life-ring fa-2x"></i></a>
+      {% endif %}
+
+
       <a href="{%url 'app:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>  
     </div>
   </div>

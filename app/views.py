@@ -122,6 +122,11 @@ def mapa(request):
 """
 @login_required
 def adicionar_boias(request):
+
+    #Se o usuário não é admin, não exibe página de adicionar boias.
+    if not request.user.is_superuser:
+         return HttpResponseRedirect(reverse('app:index'))
+
     #Instancia o formulário da página que faz a adição de boias
     form_add_boia = AdicionarBoiaForm()
 
