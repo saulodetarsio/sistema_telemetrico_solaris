@@ -1,0 +1,161 @@
+h1, h2, h3, h4, h5, h6{
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #18121e;
+}
+
+.principal {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/**Estrutura 1**/
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 10px;  
+  background: #233237;
+}
+
+.header div i{
+  margin-right: 10px; 
+}
+
+.header div a{
+  color: white;
+}
+
+/**Estrutura 2**/
+.main {
+  display: flex;
+  flex: 1; 
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.area-card-boias{
+  display: flex;
+  flex-direction: column;
+}
+
+.area-cards-boias>h5{
+  text-align: center;
+  margin: 5px;
+  color: white;
+}
+
+.card-boia{
+  display: flex;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: white;
+  align-items: center;
+}
+
+.card-boia-icone{
+  background-color: orange;
+  color: white;
+  padding: 15px;
+  margin-right: 5px;
+}
+
+.card-boia-conteudo label{
+  margin: 0px;
+  padding: 0px;
+
+}
+
+.botoes-add-rmv-boias{
+  display: flex; 
+  justify-content: center
+}
+
+
+.botoes-add-rmv-boias button{
+  margin: 10px;
+}
+
+
+/**Estrutura 3**/
+.opcao{
+  display: flex;
+  color: white;
+  align-items: center;
+  background: #233237;
+  justify-content: space-between;
+}
+
+.opcao>div{
+  padding: 10px;
+}
+
+.opcao div img{
+  border-radius: 5px;
+  display: none;
+}
+
+
+@media (max-width: 720px) and (orientation: landscape){
+  .header{
+    display: none;
+  }
+  
+  .header div h6{
+    display: none;
+  }
+  
+  .header div h3{
+    display: none;
+  }
+
+  .main{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .area-cards-boias{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+  }
+  
+  .card-boia{
+    font-size: 90%;
+    flex-basis: 42%;
+  }
+
+  .card-boia-icone{
+     padding: 10px;
+     margin: 5px;
+  }
+
+  .card-boia-conteudo{
+    padding: 0px;
+
+  }
+
+  .botoes-add-rmv-boias{
+    display: none;
+  }
+
+  .opcao>div>h5{
+    font-size: 90%;
+  }
+
+  .opcao>div>img{
+    display: block;
+  }  
+}

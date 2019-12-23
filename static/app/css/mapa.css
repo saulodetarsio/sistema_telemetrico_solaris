@@ -1,0 +1,129 @@
+
+h1, h2, h3, h4, h5, h6{
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100%;
+	background-color: #1d1e22;
+}
+
+.principal {
+	height: 100%;
+  	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+
+/**Estrutura 1**/
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background: #233237;
+	color: white;
+	padding: 10px;	
+}
+
+.header div a i{
+	margin-right: 10px; 
+}
+
+.header div a{
+	color: white;
+}
+
+
+/**Estrutura 2**/
+.main {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex: 1;
+	padding: 2px;
+}
+
+#mapa{
+	min-height: 90%;
+	min-width: 100%;
+	color: white;
+
+	margin: 0;
+	padding: 0;
+}
+
+/**Estrutura 3**/
+
+.opcao{
+	display: flex;
+	color: white;
+	align-items: center;
+	background-color: black;
+	justify-content: space-between;
+	background: #233237;
+}
+
+
+.opcao div{
+	padding: 10px;
+
+}
+
+
+.opcao div img{
+	border-radius: 5px;
+	display: none;
+}
+
+/**Dispositivo que tenha a tela de no maximo 720px e que esteja em modo landscape**/
+@media (max-width: 720px) and (orientation: landscape){
+	.header{
+		display: none;
+	}
+
+	.header div h6{
+		display: none;
+	}
+
+	.opcao div img{
+		display: block;
+	}
+}
+
+
+/* Animação  */
+@keyframes pulso-helmuth {
+    from{ 
+    	
+    	border-color: rgb(26, 255, 26);
+ 
+    }
+    to{
+    	border-color: rgb(0, 0, 0);
+    }
+}
+
+.geolocalizacao{	
+	min-height: 30px;
+	min-width: 30px;
+	border-radius: 50%;
+	border: 3px solid green;
+	animation: pulso-helmuth 2.5s ease infinite;
+	-webkit-animation: pulso-helmuth 2.5s ease infinite;
+	background-position: center;
+	background-size: contain;
+	background-image: url('../img/logo-solaris.jpg');
+	cursor: none;
+}
+
+.boia{
+	width: 20px;
+	height: 20px;
+	background-color: orange;
+	border-radius: 50%;
+}
