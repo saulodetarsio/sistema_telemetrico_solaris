@@ -10,7 +10,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 SECRET_KEY = '!g#=9^9rwvvi9272s-+2_y#-wd$ilhy&5_grx1*zl@2s$!9!2('
 
-DEBUG = True
+DEBUG = False
 
 use_websockets = True
 
