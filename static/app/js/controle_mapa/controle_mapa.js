@@ -3,7 +3,7 @@
 **/
 function ControleMapa (){	
 
-	this.mapa = L.map('mapa', { zoomControl:false , dragging: false})	
+	this.mapa = L.map('mapa', { zoomControl:false, dragging: true})	
 	this.popup = null
 	this.boias = []
 

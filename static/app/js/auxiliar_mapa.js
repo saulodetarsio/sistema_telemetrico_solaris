@@ -10,7 +10,7 @@ $(document).ready(function() {
     /***
     *   O valor máximo de zoom do mapa.
     **/
-    var zoom_maximo = 11;
+    var zoom_maximo = 15;
     
 
     /**
