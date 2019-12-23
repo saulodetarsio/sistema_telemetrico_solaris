@@ -12,6 +12,8 @@ SECRET_KEY = '!g#=9^9rwvvi9272s-+2_y#-wd$ilhy&5_grx1*zl@2s$!9!2('
 
 DEBUG = True
 
+use_websockets = True
+
 ALLOWED_HOSTS = ["*"]
 
 ROOT_URLCONF = 'bismarck_solaris.urls'
