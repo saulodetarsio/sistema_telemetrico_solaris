@@ -16,13 +16,13 @@ $(document).ready(function() {
     /**
     *   O valor mínimo de zoom do mapa.
     **/
-    var zoom_minimo =  11;
+    var zoom_minimo =  12;
 
 
     /** 
     * O valor inicial de zoom que o mapa será renderizados
     **/
-    var zoom_inicial = 11;
+    var zoom_inicial = 12;
 
 
     /**
@@ -57,7 +57,7 @@ $.ajax({
 })
 
     controleMapa.renderizar_mapa(fonte_mapa, zoom_minimo, zoom_maximo)
-    controleMapa.adicionar_marcador_barco([-22.753036, -41.8922]);
+    controleMapa.adicionar_marcador_barco([-26.252932, -48.68042]);
        
     var appSocket = new WebSocket("ws://"+ window.location.host +"/ws/app/loc");
     //Recebendo informaçoes da medidas na página
