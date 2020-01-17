@@ -95,12 +95,11 @@ body {
 	}
 }
 
-
 /* Animação  */
 @keyframes pulso-helmuth {
     from{ 
     	
-    	border-color: rgb(26, 255, 26);
+    	border-color: green;
  
     }
     to{
@@ -109,16 +108,14 @@ body {
 }
 
 .geolocalizacao{	
-	min-height: 30px;
-	min-width: 30px;
+	min-height: 20px;
+	min-width: 20px;
 	border-radius: 50%;
 	border: 3px solid green;
-	animation: pulso-helmuth 2.5s ease infinite;
-	-webkit-animation: pulso-helmuth 2.5s ease infinite;
-	background-position: center;
-	background-size: contain;
-	background-image: url('../img/logo-solaris.jpg');
-	cursor: none;
+	background-color: #AA0000;
+	animation: pulso-helmuth 3.0s ease infinite;
+	-webkit-animation: pulso-helmuth 3.0s ease infinite;
+	
 }
 
 .boia{
