@@ -1,15 +1,12 @@
 =========================  Pré requisitos ===================
-* Instalar o python 3.7
+* Instalar o python 3.7 e o gerenciador de pacotes pip3
 
-* Logar como super usuário:
-	sudo su
-
-* Atualizar lista de pacotes do sistema:
-	apt-get update 
+* Instalar o virtualenv com o seguinte comando:
+	pip3 install virtualenv
 
 * Instalar o Django. Comando abaixo:
 
-	pip3 install Django
+	pip3 install "Django == 2.2.7"
 
 * Instalar o pacote "channels" com o seguinte comando:
 	
@@ -29,15 +26,118 @@
 	pip3 install paho-mqtt
 
 
+* Logar como super usuário:
+	sudo su
+
+* Atualizar lista de pacotes do sistema:
+	apt-get update 
+
 * Instalar o mosquitto server:
-	apt install -y mosquitto mosquitto-clients
+	sudo apt install -y mosquitto mosquitto-clients
 
 * Instalar o redis server:
-	apt-get install redis-server
+	sudo apt-get install redis-serve
 
-=============================================================================
+* Instalar o apache2
+	sudo apt install apache2 libapache2-mod-wsgi-py3
+
+* Instalar o git:
+	sudo apt-get install git
+	
+
+========================= Configurando a aplicação no servidor ===================
+
+* Escolha um diretório base e clone o projeto com o seguinte comando:
+	clone https://github.com/saulodetarsio/bismarck_solaris.git
+	
+
+* Após baixar a aplicação, altere as permissões dos arquivos com os seguintes comandos:
+	sudo chown -R $USER:$USER base/bismarck_solaris
+	sudo chmod -R 755 base/bismarck_solaris
+
+* Verificar o status do servidor apache2 
+	sudo systemctl status apache2 
+
+* Navegue até o diretório /etc/apache2 e edite o arquivo "apache2.conf" com o seguinte comando:
+	sudo nano apache2
+
+* Coloque o conteúdo abaixo dentro do arquivo e salve o arquivo:
+
+<Directory /base>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+
+* navegue até o diretório /etc/apache2/sites-available/
+
+* crie um arquivo chamado bismarck-solaris.com.conf com o seguinte comando:
+	sudo nano bismarck-solaris.com.conf 
+
+* Coloque o conteúdo abaixo dentro do arquivo "bismarck-solaris.com.conf" e salve o arquivo de acordo com
+as ferramentas apresentadas pelo editor de arquivos nano. 
+
+Obs: o termo "base" indica o diretório que contem o diretório da aplicação
 
 
+ServerName bismarck-solaris.com
+
+<VirtualHost *:80>
+
+	DocumentRoot base/bismarck_solaris
+    WSGIDaemonProcess bismarck-solaris.com python-path=base/bismarck_solaris python-home=base/bismarck_solaris/myprojectenv
+    WSGIProcessGroup bismarck-solaris.com   
+    WSGIScriptAlias / base/bismarck_solaris/bismarck_solaris/wsgi.py
+
+
+	<Directory base/bismarck_solaris>
+	   Require all granted
+	</Directory>
+
+
+    	<Directory base/bismarck_solaris/bismarck_solaris>
+        	<Files wsgi.py>
+             		Require all granted
+        	</Files>
+    	</Directory>
+
+    	Alias /static/ base/bismarck_solaris/static/
+    
+	<Directory base/bismarck_solaris/static>
+	         Require all granted
+	</Directory>
+
+	
+	RewriteEngine on
+	RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC,OR]
+	RewriteCond %{HTTP:CONNECTION} ^Upgrade$ [NC]
+	RewriteRule .* ws://127.0.0.1:8001%{REQUEST_URI} [P,QSA,L]
+
+</VirtualHost>	
+
+
+* ative as configurações que você acabou de criar no arquivo "bismarck-solaris.com.conf" com o seguinte comando:
+	sudo a2ensite bismarck_solaris.com.conf
+
+* Desative as configurações padrões com o seguinte comando:
+	sudo a2dissite 000-default.conf
+
+* Execute o seguinte comando:
+	sudo a2enmod rewrite 
+
+* Reinicie o apache com o seguinte comando:
+	sudo systemctl restart apache2
+
+
+* Verifique o status do servidor apache com o seguinte comando: 
+	sudo systemctl status apache2
+
+* Acionar os seguintes comandos para habilitar módulos para comunicação via websocket:
+	a2enmod proxy
+	a2enmod proxy_http
+	a2enmod proxy_wstunnel
+	
+* 
 
 ================ Executar a aplicação ==============================
 
@@ -47,42 +147,15 @@
 * Abra outro terminal e inicie o servidor redis, digitando o comando:
 	- redis_server
 
-
-* Editar o arquivo settings.py da aplicação. Ele está no seguinte diretório:
-	- bismarckl_solaris_2019/bismarck_solaris/settings.py
-
-	- Encontrar a variável ALLOWED_HOSTS e coloque endereço ip do raspi.
-
-	- O endereço ip é conseguido digitando o comando ifconfig no terminal.
-
-	- Salve e feche o arquivo.
-
-
-* Com o terminal, navegue até a pasta raiz da aplicação
-
-* Digite o seguinte comando para iniciar aplicação:
-	python3 manage.py runserver 0.0.0.0:8000 
-
-* Vá a um browser e digite o seguinte endereço para acesso à aplicação:
-	endereço_ip_raspi:8000/app
-
-
-* Com os seguintes dados, tenha acesso à aplicação:
-	usuario:
-	senha:	
-
-=====================================================================================
-
-
-================================ Simular transmissão ===================
-
-* Com o terminal, navegue até a pasta "bismarck_solaris_2019/simular_transmissao_bismarck" e digite o seguinte comando:
-
+* Com o terminal, navegue até a pasta base/bismarck_solaris/simular_transmissao_bismarck" e digite o seguinte comando:
 	python3  publicador.py
 
+* De dentro da pasta raiz da aplicação, o mesmo diretório de "manage.py", acionar o seguinte comando:
+	daphne -b 127.0.0.1 -p 8001 bismarck_solaris.asgi:application
 
-* Com outro terminal, navegue até a pasta "bismarck_solaris_2019/simular_transmissao_bismarck" e digite o seguinte comando:
-	python3  observador.py
+* Abrir o browser e informar o ip do servidor e a url para acesso aos recursos da aplicação:
+	IP_SERVIDOR/app -> tela que contem as grandezas medidas
+	IP_SERVIDRO/app/mapa -> ver geolocalização da embarcação
+	IP_SERVIDOR/app/adicionar_boias -> opção de adicionar boias para compor o circuito de prova (só para administradores)
 
-* Se informações estão sendo impressas no terminal do observador, então a tranmissão está ok.
-
+//=====================================================================
