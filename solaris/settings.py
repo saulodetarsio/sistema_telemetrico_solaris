@@ -16,7 +16,7 @@ use_websockets = True
 
 ALLOWED_HOSTS = ["*"]
 
-ROOT_URLCONF = 'bismarck_solaris.urls'
+ROOT_URLCONF = 'solaris.urls'
 
 # Application definition
 

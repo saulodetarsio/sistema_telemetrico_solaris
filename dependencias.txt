@@ -1,0 +1,6 @@
+Django == 2.2.7
+channels
+asgi_redis
+service_identity
+channels_redis
+paho-mqtt
