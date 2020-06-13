@@ -53,7 +53,7 @@
 
 * Após baixar a aplicação, altere as permissões dos arquivos com os seguintes comandos:
 	sudo chown -R $USER:$USER base/bismarck_solaris
-	sudo chmod -R 755 base/bismarck_solaris
+	sudo chmod -R 777 base/bismarck_solaris
 
 * Verificar o status do servidor apache2 
 	sudo systemctl status apache2 
