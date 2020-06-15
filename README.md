@@ -59,7 +59,7 @@
 
 3. Com o terminal ativado, navegue até a pasta raiz da aplicação e execute o comando para criar a estrutura
 de pastas e arquivos de dependências:
-	* virtualenv dir_dependencias
+	* python3 -m venv dir_dependencias
 
 4. Ative o ambiente virtual para a aplicação instalar e utilizar as dependências:
 	* source dir_dependencias/bin/activate
@@ -68,15 +68,15 @@ de pastas e arquivos de dependências:
 	* pip3 install -r dependencias.txt
  
 
- ##Configurando o servidor apache para servir a aplicação
+## Configurando o servidor apache para servir a aplicação
 
  * Abra o terminal e navegue até a pasta onde está contida a pasta 
  'sistema_telemetrico_solaris' e execute o comando para trocar a permissão:
  
-    * sudo chown -R $USER:$USER sistema_telemetrico_solaris
-	* sudo chmod -R 777 sistema_telemetrico_solaris
+    * sudo chown -R $USER:$USER base/sistema_telemetrico_solaris
+	* sudo chmod -R 777 base/sistema_telemetrico_solaris
 
-onde 'base' o diretório onde se encontra a aplicação:
+onde 'base' é o diretório onde se encontra a aplicação:
    * exemplo: '/var/www/'
    
  * Dentro da pasta /etc/apache2/sites-avaialable, crie um arquivo chamado "solaris.com.conf" 
@@ -147,3 +147,25 @@ via websocket:
 
 * Verifique o status do servidor apache com o seguinte comando: 
 	sudo systemctl status apache2
+
+## Executando a aplicação
+
+1. Abra o terminal na pasta raiz da aplicação e execute o seguinte comando: 
+	* daphne -b 127.0.0.1 -p 8001 bismarck_solaris.asgi:application
+	
+2. Execute o servidor mosquitto com o seguinte comando no terminal:
+	- mosquitto
+
+3. Abra outro terminal e inicie o servidor redis, digitando o comando:
+	- redis_server
+
+4. Abra o terminal na pasta base/sistema_telemetrico_solaris/teste_mqtt e digite o seguinte comando:
+	python3 transmissao_dados.py
+
+5. Execute o navegador de sua preferência e informe a seguinte url para acessar a página de login da aplicação
+	solaris.com/app
+
+6. Para logar, informe os seguintes dados de acesso:
+	Usuário: usuario
+	Senha: solaris_iff
+	
