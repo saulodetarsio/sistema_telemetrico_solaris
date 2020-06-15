@@ -166,6 +166,5 @@ via websocket:
 	solaris.com/app
 
 6. Para logar, informe os seguintes dados de acesso:
-	Usuário: usuario
-	Senha: solaris_iff
-	
+	* Usuário: usuario
+	* Senha: solaris_iff
