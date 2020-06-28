@@ -1,0 +1,31 @@
+1) Sobre o sistema:
+	
+	Tarefas: 
+		- calcular maior distância entre o receptor e o transmissor.
+		- achar o motivo de a aplicação não funcionar quando está na água, a não ser quando o 
+		motivo está ligado.
+
+	Novas implementações:  
+		- transmissão de áudio no sistema;
+		- tela na maleta mostrado a aplicação;
+		- trazer uma tv com tripé;
+		- implementar o tempo de prova e distância percorrida;
+		- marcar os pontos de boias... o piloto faria isso para gravar coordenadas das boias com um
+		botão localizado no painel;
+		- estimativa de descarga de bateria;
+		- antena com motor de passo. fazer a antena acompanhar o barco;
+		- melhorar a estrutura de suporte da antena;
+		- melhorar fixação da antena no barco;
+		- colocar a antena do barco em um compartimento para proteção de chuva e etc;
+		- implementar leds para feedback de leitura de cartão SD e conexão de rede; 
+		- melhorar output/tela para o piloto. uma abordagem sugerida é utilizar um tablet no painel;
+		- dados na tela: velocidade, tempo de prova(pessoal em terra dispararia o cronômetro) 
+		- implementar um forma de extrair os dados do cartão sem removê-lo... criar um funcionalidade na aplicação
+		para realizar;
+		- imprimir caixas 3D para gurdar os circuitos eletrônicos utilizados no sistema;
+		- abandonar arduinos e abordar implementação com o ESP
+
+;
+	Análises dos dados:
+		- quanto tempo dura a bateria com acelerador no máximo;
+		- 
