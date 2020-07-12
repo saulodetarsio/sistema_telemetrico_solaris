@@ -1,3 +1,5 @@
 app/migrations
 *.pyc
 db.sqlite3
+dir_dependencias/*
+.idea/*
