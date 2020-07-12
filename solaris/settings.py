@@ -59,8 +59,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bismarck_solaris.wsgi.application'
-ASGI_APPLICATION = "bismarck_solaris.routing.application"
+WSGI_APPLICATION = 'solaris.wsgi.application'
+ASGI_APPLICATION = "solaris.routing.application"
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
