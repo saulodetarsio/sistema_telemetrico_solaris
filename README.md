@@ -19,8 +19,11 @@
 
     * sudo apt-get install python3-setuptools
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee
 3. Verifique se python3 foi instalado corretamente com o seguinte comando:
     * python --version
     
@@ -51,10 +54,13 @@
 12. Instale o git na máquina com o seguinte comando:
     * sudo apt-get install git   
  
+<<<<<<< HEAD
 13. Instale os seguintes pacote:
     * sudo apt-get install libapache2-mod-wsgi-py3
 
 
+=======
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee
 ## Baixando e configurando a aplicação
 
 1. Em um diretório de sua preferência, baixe o projeto do repositório remoto com o seguinte comando:
@@ -65,7 +71,11 @@
 
 3. Com o terminal ativado, navegue até a pasta raiz da aplicação e execute o comando para criar a estrutura
 de pastas e arquivos de dependências:
+<<<<<<< HEAD
 	* virtualenv dir_dependencias
+=======
+	* python3 -m venv dir_dependencias
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee
 
 4. Ative o ambiente virtual para a aplicação instalar e utilizar as dependências:
 	* source dir_dependencias/bin/activate
@@ -73,6 +83,7 @@ de pastas e arquivos de dependências:
 5. Instale todas as dependências presentes no arquivo dependencias.txt localizado na pasta raiz do projeto.
 	* pip3 install -r dependencias.txt
  
+<<<<<<< HEAD
  ##Configurando o servidor apache para servir a aplicação
  * Abra o terminal e navegue até a pasta onde está contida a pasta 
  'sistema_telemetrico_solaris' e execute o comando para trocar a permissão:
@@ -94,6 +105,19 @@ de pastas e arquivos de dependências:
  ```
 onde 'base' o diretório onde se encontra a aplicação:
    * exemplo: '/home/saulo/PycharmProjects/'
+=======
+
+## Configurando o servidor apache para servir a aplicação
+
+ * Abra o terminal e navegue até a pasta onde está contida a pasta 
+ 'sistema_telemetrico_solaris' e execute o comando para trocar a permissão:
+ 
+    * sudo chown -R $USER:$USER base/sistema_telemetrico_solaris
+	* sudo chmod -R 777 base/sistema_telemetrico_solaris
+
+onde 'base' é o diretório onde se encontra a aplicação:
+   * exemplo: '/var/www/'
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee
    
  * Dentro da pasta /etc/apache2/sites-avaialable, crie um arquivo chamado "solaris.com.conf" 
  com o seguinte comando:
@@ -103,6 +127,7 @@ onde 'base' o diretório onde se encontra a aplicação:
 salve e feche o arquivo.
 
 ```xhtml
+<<<<<<< HEAD
 
 <VirtualHost *:80>
 	ServerName solaris.com
@@ -137,6 +162,39 @@ salve e feche o arquivo.
 	RewriteRule .* ws://127.0.0.1:8001%{REQUEST_URI} [P,QSA,L]
 
 </VirtualHost>	
+=======
+<VirtualHost *:80> 
+ ServerName solaris.com 
+ ServerAlias solaris.com
+
+ WSGIScriptAlias / /var/www/sistema_telemetrico_solaris/solaris/wsgi.py 
+ 
+ WSGIDaemonProcess solaris.com python-path=/var/www/sistema_telemetrico_solaris/solaris:/var/www/sistema_telemetrico_solaris/dir_dependencias/lib/python3.7/site-packages
+
+ WSGIProcessGroup solaris.com 
+	
+ <Directory /var/www/sistema_telemetrico_solaris/solaris>
+     <Files wsgi.py>
+     	Require all granted
+    </Files>
+ </Directory>
+
+
+ Alias /static/ /var/www/sistema_telemetrico_solaris/static/
+ 
+ <Directory /var/www/sistema_telemetrico_solaris/static> 
+  Require all granted 
+ </Directory>
+
+ ErrorLog /var/www/sistema_telemetrico_solaris/error.log
+
+ RewriteEngine on
+ RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC,OR]
+ RewriteCond %{HTTP:CONNECTION} ^Upgrade$ [NC]
+ RewriteRule .* ws://127.0.0.1:8001%{REQUEST_URI} [P,QSA,L]
+ 
+</VirtualHost> 
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee
 ```
 
 * No diretório '/etc/apache2/sites-avaialable', ative as configurações que você 
@@ -166,3 +224,27 @@ via websocket:
 
 * Verifique o status do servidor apache com o seguinte comando: 
 	sudo systemctl status apache2
+<<<<<<< HEAD
+=======
+
+## Executando a aplicação
+
+1. Abra o terminal na pasta raiz da aplicação e execute o seguinte comando: 
+	* daphne -b 127.0.0.1 -p 8001 bismarck_solaris.asgi:application
+	
+2. Execute o servidor mosquitto com o seguinte comando no terminal:
+	- mosquitto
+
+3. Abra outro terminal e inicie o servidor redis, digitando o comando:
+	- redis_server
+
+4. Abra o terminal na pasta base/sistema_telemetrico_solaris/teste_mqtt e digite o seguinte comando:
+	python3 transmissao_dados.py
+
+5. Execute o navegador de sua preferência e informe a seguinte url para acessar a página de login da aplicação
+	solaris.com/app
+
+6. Para logar, informe os seguintes dados de acesso:
+	* Usuário: usuario
+	* Senha: solaris_iff
+>>>>>>> 52f4d86b4aa5cabaf65251e978047e801c0895ee

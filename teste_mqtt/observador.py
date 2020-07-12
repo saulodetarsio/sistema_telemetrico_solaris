@@ -1,27 +1,29 @@
 import sys
-import paho.mqtt.client as mqtt # importa o pacote mqtt
-#import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
 
 import threading 
 import time
 from datetime import datetime
 
-
-
-
 broker = "localhost" # define o host do broker mqtt'
 port = 1883 # define a porta do broker
 keppAlive = 60 # define o keepAlive da conexao
-topic = 'app/medidas' # define o topico que este script assinara
 
+eq_1 = 'app1/dados/equipe1' # define o topico que este script assinara
+eq_2 = 'app1/dados/equipe2' # define o topico que este script assinara
+eq_3 = 'app1/dados/equipe3'
+eq_4 = 'app1/dados/equipe4'
 
-
+topics = 'app1/dados/#'
 # funcao on_connect sera atribuida e chamada quando a conexao for iniciada
 # ela printara na tela caso tudo ocorra certo durante a tentativa de conexao
 # tambem ira assina o topico que foi declarado acima
 def on_connect(client, userdata, flags, rc):
     print("[STATUS] Conectado ao Broker. Resultado de conexao: "+str(rc))
-    client.subscribe(topic)
+    client.subscribe(topics)
+   # client.subscribe(eq_2)
+   # client.subscribe(eq_3)
+   # client.subscribe(eq_4)
 
 # possui o mesmo cenario que o on_connect, porem, ela sera atrelada ao loop
 # do script, pois toda vez que receber uma nova mensagem do topico assinado, ela sera invocada
