@@ -154,7 +154,7 @@ acabou de criar no arquivo "solaris.com.conf" com o seguinte comando:
 	* sudo systemctl restart apache2
 
 * Verifique o status do servidor apache com o seguinte comando: 
-	sudo systemctl status apache2
+	* sudo systemctl status apache2
 
 * Acionar os seguintes comandos para habilitar módulos para comunicação 
 via websocket:
@@ -166,7 +166,7 @@ via websocket:
 	* sudo systemctl restart apache2
 
 * Verifique o status do servidor apache com o seguinte comando: 
-	sudo systemctl status apache2
+	* sudo systemctl status apache2
 
 
 ## Executando a aplicação
@@ -178,17 +178,17 @@ via websocket:
 3. Abra o terminal na pasta raiz da aplicação e execute o seguinte comando: 
 	* daphne -b 127.0.0.1 -p 8001 solaris.asgi:application
 	
-4. Execute o servidor mosquitto com o seguinte comando no terminal:
-	- mosquitto
+4. Abra um outro terminal e verifique se o servidor mosquitto está rodando normalmente:
+	- sudo systemctl status mosquitto
 
-5. Abra outro terminal e inicie o servidor redis, digitando o comando:
-	- redis_server
+4. Abra um outro terminal e verifique se o servidor redis está rodando normalmente:
+	- sudo systemctl status redis
 
 6. Abra o terminal na pasta var/www/sistema_telemetrico_solaris/teste_mqtt e digite o seguinte comando:
-	python3 transmissao_dados.py
+	* python3 transmissao_dados.py
 
 5. Execute o navegador de sua preferência e informe a seguinte url para acessar a página de login da aplicação
-	solaris.com/app
+solaris.com/app
 
 6. Para logar, informe os seguintes dados de acesso:
 	* Usuário: usuario
