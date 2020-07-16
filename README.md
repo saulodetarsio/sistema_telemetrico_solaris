@@ -78,7 +78,7 @@ de pastas e arquivos de dependências:
  ##Configurando o servidor apache para servir a aplicação
  * Abra o terminal e navegue até a pasta 'var/www/sistema_telemetrico_solaris' e execute o comando para trocar a permissão:
     * sudo chown -R $USER:$USER sistema_telemetrico_solaris
-	* sudo chmod -R 755 sistema_telemetrico_solaris
+	* sudo chmod -R 777 sistema_telemetrico_solaris
     
  * Navegue até o diretório /etc/apache2 e edite o arquivo "apache2.conf" com 
  o seguinte comando:
@@ -93,7 +93,7 @@ de pastas e arquivos de dependências:
     </Directory>
  ```
 
- * Navegue até a pasta /etc/apache2/sites-avaialable e crie um arquivo chamado "solaris.com.conf" 
+ * Navegue até a pasta /etc/apache2/sites-available e crie um arquivo chamado "solaris.com.conf" 
  com o seguinte comando:
 	* sudo nano solaris.com.conf
 	
@@ -101,40 +101,37 @@ de pastas e arquivos de dependências:
 salve e feche o arquivo.
 
 ```xhtml
+<VirtualHost *:80> 
+ ServerName solaris.com 
+ ServerAlias solaris.com
 
-<VirtualHost *:80>
-    
-    ServerName solaris.com
-    DocumentRoot base/sistema_telemetrico_solaris
-    WSGIDaemonProcess bismarck-solaris.com python-path=base/bismarck_solaris python-home=base/bismarck_solaris/myprojectenv
-    WSGIProcessGroup bismarck-solaris.com   
-    WSGIScriptAlias / base/bismarck_solaris/bismarck_solaris/wsgi.py
+ WSGIScriptAlias / /var/www/sistema_telemetrico_solaris/solaris/wsgi.py 
+ 
+ WSGIDaemonProcess solaris.com python-path=/var/www/sistema_telemetrico_solaris/solaris:/var/www/sistema_telemetrico_solaris/dir_dependencias/lib/python3.7/site-packages
 
-
-	<Directory base/bismarck_solaris>
-	   Require all granted
-	</Directory>
-
-
-    	<Directory base/bismarck_solaris/bismarck_solaris>
-        	<Files wsgi.py>
-             		Require all granted
-        	</Files>
-    	</Directory>
-
-    	Alias /static/ base/bismarck_solaris/static/
-    
-	<Directory base/bismarck_solaris/static>
-	         Require all granted
-	</Directory>
-
+ WSGIProcessGroup solaris.com 
 	
-	RewriteEngine on
-	RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC,OR]
-	RewriteCond %{HTTP:CONNECTION} ^Upgrade$ [NC]
-	RewriteRule .* ws://127.0.0.1:8001%{REQUEST_URI} [P,QSA,L]
+ <Directory /var/www/sistema_telemetrico_solaris/solaris>
+     <Files wsgi.py>
+     	Require all granted
+    </Files>
+ </Directory>
 
-</VirtualHost>
+
+ Alias /static/ /var/www/sistema_telemetrico_solaris/static/
+ 
+ <Directory /var/www/sistema_telemetrico_solaris/static> 
+  Require all granted 
+ </Directory>
+
+ ErrorLog /var/www/sistema_telemetrico_solaris/error.log
+
+ RewriteEngine on
+ RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC,OR]
+ RewriteCond %{HTTP:CONNECTION} ^Upgrade$ [NC]
+ RewriteRule .* ws://127.0.0.1:8001%{REQUEST_URI} [P,QSA,L]
+ 
+</VirtualHost> 
 ```
 
 * Com o terminal, navegue até a pasta pasta /etc e edite o arquivo 'hosts' com o seguinte comando:
@@ -143,7 +140,7 @@ salve e feche o arquivo.
 * Adicione a linha abaixo ao arquivo, salve e feche o arquivo:
     * 127.0.0.1 solaris.com
 
-* No diretório '/etc/apache2/sites-avaialable', ative as configurações que você 
+* No diretório '/etc/apache2/sites-available', ative as configurações que você 
 acabou de criar no arquivo "solaris.com.conf" com o seguinte comando:
 	* sudo a2ensite solaris.com.conf
 
